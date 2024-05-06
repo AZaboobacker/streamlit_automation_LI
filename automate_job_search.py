@@ -264,11 +264,11 @@ def fetch_jobs(keywords, location, geo_id, job_id, total_jobs):
         o["job-title"] = soup.find("div", {"class": "top-card-layout__entity-info"}).find("a").text.strip() if soup.find("div", {"class": "top-card-layout__entity-info"}) else None
         o["level"] = soup.find("ul", {"class": "description__job-criteria-list"}).find("li").text.replace("Seniority level", "").strip() if soup.find("ul", {"class": "description__job-criteria-list"}) else None
         o["description"] = soup.find("div", {"class": "show-more-less-html__markup"}).get_text(strip=True) if soup.find("div", {"class": "show-more-less-html__markup"}) else "No description available"
-        o["salary"] = soup.find("span", {"class": "salary"}).get_text(strip=True) if soup.find("span", {"class": "salary"}) else "Salary not specified"
+        #o["salary"] = soup.find("span", {"class": "salary"}).get_text(strip=True) if soup.find("span", {"class": "salary"}) else "Salary not specified"
         o["date_posted"] = soup.find("span", {"class": "posted-time-ago__text"}).get_text(strip=True) if soup.find("span", {"class": "posted-time-ago__text"}) else "Date not available"
         o["link"] = f'https://www.linkedin.com/jobs/view/{j}'
         o["skills"] = ', '.join([skill.get_text(strip=True) for skill in soup.find_all("span", {"class": "skill"})])
-        o["job_type"] = soup.find("span", {"class": "job-type"}).get_text(strip=True) if soup.find("span", {"class": "job-type"}) else "Job type not specified"
+        #o["job_type"] = soup.find("span", {"class": "job-type"}).get_text(strip=True) if soup.find("span", {"class": "job-type"}) else "Job type not specified"
 
         k.append(o)
 
@@ -294,8 +294,8 @@ if st.button('Fetch Jobs'):
         for index, row in df.iterrows():
             st.write(f"#### {row['job-title']} at {row['company']}")
             st.write(f"**Level:** {row['level']}")
-            st.write(f"**Type:** {row['job_type']}")
-            st.write(f"**Salary:** {row['salary']}")
+            #st.write(f"**Type:** {row['job_type']}")
+            #st.write(f"**Salary:** {row['salary']}")
             st.write(f"**Date Posted:** {row['date_posted'].strftime('%B %d, %Y')}")
             st.write(f"**Description:** {row['description']}")
             st.write(f"**Skills:** {row['skills']}")
